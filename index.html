@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emma Rose - Digital Atelier | Graphic Designer & Web Developer</title>
+    <meta name="description" content="Emma Rose - 19-year-old graphic designer and web developer with 5+ years of experience. Explore my digital atelier of stunning visual designs.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    
+    <style>
+        :root {
+            --void-black: #0a0a0a;
+            --quantum-violet: #6366f1;
+            --nebula-coral: #ff6b6b;
+            --stellar-gold: #ffd700;
+            --plasma-cyan: #00ffff;
+            --cosmic-white: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--void-black);
+            color: var(--cosmic-white);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--plasma-cyan), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--quantum-violet);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Neural Network Background */
+        .neural-network {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--void-black) 0%, #1a1a2e 50%, var(--void-black) 100%);
+            overflow: hidden;
+        }
+
+        .liquid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, var(--quantum-violet) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--nebula-coral) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, var(--plasma-cyan) 0%, transparent 70%);
+            filter: blur(100px);
+            animation: liquidFlow 20s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes liquidFlow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            33% { transform: scale(1.1) rotate(120deg); }
+            66% { transform: scale(0.9) rotate(240deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--stellar-gold), var(--plasma-cyan), var(--nebula-coral));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographicShift 4s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes holographicShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-tagline {
+            font-style: italic;
+            margin-bottom: 3rem;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            opacity: 0.7;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--quantum-violet), var(--nebula-coral));
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--plasma-cyan);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--stellar-gold), var(--quantum-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .design-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(255, 107, 107, 0.1));
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .design-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--quantum-violet), var(--nebula-coral), var(--plasma-cyan));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .design-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .design-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--stellar-gold);
+        }
+
+        .card-description {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .view-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--plasma-cyan);
+            color: var(--plasma-cyan);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .view-btn:hover {
+            background: var(--plasma-cyan);
+            color: var(--void-black);
+            transform: scale(1.05);
+        }
+
+         /* Modal */
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            padding: 0.3rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(26, 26, 46, 0.9));
+            border-radius: 20px;
+            width: 100%;
+            max-height: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--cosmic-white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .close-btn:hover {
+            color: var(--nebula-coral);
+            transform: rotate(90deg);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-text {
+            padding: 1rem;
+            flex-grow: 1;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .modal-text h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--cosmic-white);
+        }
+
+        .modal-text p {
+            line-height: 1.;
+            margin: 0;
+            font-size: 0.5rem;
+        }
+
+        /* Desktop styles */
+        @media (min-width: 768px) {
+            .modal-content {
+                max-width: 600px;
+                max-height: 70%;
+                flex-direction: row;
+            }
+
+            .modal-image {
+                width: 250px;
+                height: auto;
+                border-radius: 15px 0 0 15px;
+                min-height: 300px;
+            }
+
+            .modal-text {
+                padding: 2.5rem;
+                display: block;
+            }
+
+            .modal-text h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Large desktop */
+        @media (min-width: 1024px) {
+            .modal-content {
+                max-width: 800px;
+            }
+
+            .modal-image {
+                width: 300px;
+            }
+            .modal-text{
+                display: block;
+            }
+        }
+
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            position: relative;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(255, 107, 107, 0.05));
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--quantum-violet), var(--nebula-coral));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-image img {
+            width: 80%;
+            
+        }
+
+        .profile-image::before {
+            content: 'ER';
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            opacity: 0;
+            display: none;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--stellar-gold);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--plasma-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--cosmic-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--plasma-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--quantum-violet), var(--nebula-coral));
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--cosmic-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .social-link:hover {
+            background: var(--plasma-cyan);
+            color: var(--void-black);
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--void-black);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+        }
+
+        .loading-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(45deg, var(--stellar-gold), var(--plasma-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">Emma Rose</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Neural Network Background -->
+    <canvas class="neural-network" id="neuralNetwork"></canvas>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="liquid-bg"></div>
+        <div class="particles" id="particles"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Emma Rose</h1>
+            <p class="hero-subtitle">Digital Atelier</p>
+            <p class="hero-tagline">"Design isn't what it looks like. It's how it feels." - Crafted by Emma Rose</p>
+            <a href="#gallery" class="cta-button">Enter My Universe</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title fade-in">The Digital Atelier</h2>
+        <div class="gallery-container">
+            <!-- Design Cards -->
+            <div class="design-card fade-in" onclick="openModal('modal1')">
+                <div class="card-content">
+                    <h3 class="card-title">Internship Event Flyer</h3>
+                    <p class="card-description">A bold and helpful flyer designed for a student internship event.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal2')">
+                <div class="card-content">
+                    <h3 class="card-title">Virtual Open House Flyer</h3>
+                    <p class="card-description">A clean and modern flyer design created for a real estate company's virtual open house event.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal3')">
+                <div class="card-content">
+                    <h3 class="card-title">Patriotic 5K Run Flyer</h3>
+                    <p class="card-description">A bold and energetic flyer created for a charity 5K run event.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal4')">
+                <div class="card-content">
+                    <h3 class="card-title">African Hair Braiding Flyer</h3>
+                    <p class="card-description">A colorful and eye-catching flyer promoting African hair braiding services.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal5')">
+                <div class="card-content">
+                    <h3 class="card-title">Spanish Tapas Cooking Class Flyer</h3>
+                    <p class="card-description">A warm and inviting flyer for a hands-on cooking class hosted by Emma Rose.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal6')">
+                <div class="card-content">
+                    <h3 class="card-title">Home Care Services Flyer</h3>
+                    <p class="card-description">A professional and caring flyer designed for a home care agency.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal7')">
+                <div class="card-content">
+                    <h3 class="card-title">Yard Sale Event Flyer</h3>
+                    <p class="card-description">A bright and friendly flyer designed to promote a one-day yard sale.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal8')">
+                <div class="card-content">
+                    <h3 class="card-title">Teen Fitness Class Flyer</h3>
+                    <p class="card-description">A bold and energetic flyer promoting a 4-week fitness program for teens aged 12–16.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal9')">
+                <div class="card-content">
+                    <h3 class="card-title">Business Coaching Flyer</h3>
+                    <p class="card-description">A bold and professional flyer promoting business coaching services by Emma Rose.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+            
+            <div class="design-card fade-in" onclick="openModal('modal10')">
+                <div class="card-content">
+                    <h3 class="card-title">Restaurant Grand Opening Flyer</h3>
+                    <p class="card-description">A vibrant flyer designed to promote the grand opening of a new restaurant.</p>
+                    <button class="view-btn">Explore Design</button>
+                </div>
+            </div>
+
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="profile-image fade-in">
+                <img src="https://i.postimg.cc/CLdvF5HV/IMG-20250706-101129.jpg" alt="Description of the image">
+            </div>
+            <div class="about-content fade-in">
+                <h2>The Creator's Mind</h2>
+                <p class="about-text">
+                    I'm Emma Rose, a 19-year-old graphic designer and web developer blending creativity with mathematical precision. 
+                    With 5+ years of experience, I craft visually stunning designs that captivate and inspire. My dual nature as 
+                    both an artist and mathematician allows me to create work that is not only beautiful but structurally sound 
+                    and conceptually deep.
+                </p>
+                <p class="about-text">
+                    Currently pursuing Mathematics at the 200 level, I bring analytical thinking to every creative project. 
+                    My work exists at the intersection of art and science, where golden ratios meet gradient flows, and where 
+                    algorithms birth beauty.
+                </p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-label">Designs Created</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-label">% Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2 class="section-title fade-in">The Portal</h2>
+            <div class="contact-form fade-in">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-textarea" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+            
+            <div class="social-links fade-in">
+                <a href="https://twitter.com/1codexcreations" class="social-link" target="_blank" rel="noopener">𝕏</a>
+                <a href="https://instagram.com/1codexcreations" class="social-link" target="_blank" rel="noopener">📷</a>
+                <a href="https://behance.net/1codexcreations" class="social-link" target="_blank" rel="noopener">🎨</a>
+                <a href="mailto:emma@1codexcreations.com" class="social-link">✉️</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div class="modal" id="modal1">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal1')">&times;</button>
+            <img src="https://i.postimg.cc/YCTr0cBX/flyerdesign-04072025-105902.png" 
+                 alt="Quantum Branding" 
+                 class="modal-image">
+            <div class="modal-text">
+                <h3>Internship Event Flyer</h3>
+                <p>A bold and helpful flyer designed for a student internship event. It shares key info like date, time, location, and what attendees can expect—like resume tips, networking advice, and free food</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional modals would follow the same pattern -->
+    <div class="modal" id="modal2">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal2')">&times;</button>
+            <img src="https://i.postimg.cc/mDf6tjDf/flyerdesign-04072025-123248.png" 
+                 alt="Quantum Branding" 
+                 class="modal-image">
+            <div class="modal-text">
+                <h3>Virtual Open House Flyer</h3>
+                <p>A clean and modern flyer design created for a real estate company's virtual open house event. It highlights key details like date, time, and contact info with a professional layout and inviting visuals.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal3">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('modal3')">&times;</button>
+        <img src="https://i.postimg.cc/3rDf2PpM/flyerdesign-04072025-105713.png" 
+             alt="Patriotic 5K Run Flyer" 
+             class="modal-image">
+        <div class="modal-text">
+            <h3>Patriotic 5K Run Flyer</h3>
+            <p>A bold and energetic flyer created for a charity 5K run event. It features key event details like date, time, and location, with a strong patriotic theme to attract runners and supporters.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal4">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('modal4')">&times;</button>
+        <img src="https://i.postimg.cc/PJzm2zTD/flyerdesign-04072025-105446.png" 
+             alt="African Hair Braiding Flyer" 
+             class="modal-image">
+        <div class="modal-text">
+            <h3>African Hair Braiding Flyer</h3>
+            <p>A colorful and eye-catching flyer promoting African hair braiding services. It features popular styles like Havana Twists, Dreadlocks, and Senegalese Twists, along with a special discount and contact details.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal5">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('modal5')">&times;</button>
+        <img src="https://i.postimg.cc/cCmnQxBM/flyerdesign-04072025-105249.png" 
+             alt="Spanish Tapas Cooking Class Flyer" 
+             class="modal-image">
+        <div class="modal-text">
+            <h3>Spanish Tapas Cooking Class Flyer</h3>
+            <p>A warm and inviting flyer for a hands-on cooking class hosted by Emma Rose. It highlights the date, time, location, and a delicious tapas menu including croquettes, meatballs, and churros.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal6">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('modal6')">&times;</button>
+        <img src="https://i.postimg.cc/59qLcgWY/flyerdesign-04072025-105117.png" 
+             alt="Home Care Services Flyer" 
+             class="modal-image">
+        <div class="modal-text">
+            <h3>Home Care Services Flyer</h3>
+            <p>A professional and caring flyer designed for a home care agency. It highlights services like personal care, medical help, and companionship for seniors and people recovering at home.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal7">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('modal7')">&times;</button>
+        <img src="https://i.postimg.cc/cCXvvDdF/flyerdesign-04072025-104947.png" 
+             alt="Yard Sale Event Flyer" 
+             class="modal-image">
+        <div class="modal-text">
+            <h3>Yard Sale Event Flyer</h3>
+            <p>A bright and friendly flyer designed to promote a one-day yard sale. It includes the date, time, location, and a list of items for sale like home decor, toys, and kitchenware—perfect for attracting local shoppers.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal8">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('modal8')">&times;</button>
+        <img src="https://i.postimg.cc/dtN7vSH1/flyerdesign-04072025-104829.png" 
+             alt="Teen Fitness Class Flyer" 
+             class="modal-image">
+        <div class="modal-text">
+            <h3>Teen Fitness Class Flyer</h3>
+            <p>A bold and energetic flyer promoting a 4-week fitness program for teens aged 12–16. It highlights strength training, cardio, and confidence-building, with clear details on schedule, location, and how to book.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal9">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('modal9')">&times;</button>
+        <img src="https://i.postimg.cc/JnKrxGSn/flyerdesign-04072025-104726.png" 
+             alt="Business Coaching Flyer" 
+             class="modal-image">
+        <div class="modal-text">
+            <h3>Business Coaching Flyer</h3>
+            <p>A bold and professional flyer promoting business coaching services by Emma Rose. It highlights key offerings like strategy, marketing, leadership, and financial growth—perfect for ambitious entrepreneurs.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal10">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('modal10')">&times;</button>
+        <img src="https://i.postimg.cc/TPfvsTVW/flyerdesign-04072025-104358.png" 
+             alt="Restaurant Grand Opening Flyer" 
+             class="modal-image">
+        <div class="modal-text">
+            <h3>Restaurant Grand Opening Flyer</h3>
+            <p>A vibrant flyer designed to promote the grand opening of a new restaurant. It features event details like live music, food and drink specials, and a DJ party—all happening on June 12 at 445 W Mount Eden Road, Anchorage.</p>
+        </div>
+    </div>
+</div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 1000);
+            }, 2000);
+        });
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursorFollower');
+
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    cursorFollower.style.left = e.clientX - 20 + 'px';
+                    cursorFollower.style.top = e.clientY - 20 + 'px';
+                }, 100);
+            });
+
+            // Cursor interactions
+            document.querySelectorAll('a, button, .design-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(2)';
+                    cursorFollower.style.transform = 'scale(1.5)';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursorFollower.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Neural Network Background
+        const canvas = document.getElementById('neuralNetwork');
+        const ctx = canvas.getContext('2d');
+        let nodes = [];
+        let connections = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createNodes() {
+            nodes = [];
+            const nodeCount = Math.floor((canvas.width * canvas.height) / 50000);
+            
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1
+                });
+            }
+        }
+
+        function drawNodes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw connections
+            ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            // Draw nodes
+            ctx.fillStyle = 'rgba(99, 102, 241, 0.6)';
+            nodes.forEach(node => {
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Update position
+                node.x += node.vx;
+                node.y += node.vy;
+                
+                // Bounce off edges
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+            });
+        }
+
+        function animateNetwork() {
+            drawNodes();
+            requestAnimationFrame(animateNetwork);
+        }
+
+        resizeCanvas();
+        createNodes();
+        animateNetwork();
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            createNodes();
+        });
+
+        // Floating Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Scroll Animations
+        function handleScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check on load
+
+        // Stats Counter Animation
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                let current = 0;
+                const increment = target / 100;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current) + (stat.textContent.includes('%') ? '%' : '');
+                }, 20);
+            });
+        }
+
+        // Trigger stats animation when about section is visible
+        const aboutSection = document.getElementById('about');
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    aboutObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        aboutObserver.observe(aboutSection);
+
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            
+            // GSAP animation
+            gsap.fromTo(modal.querySelector('.modal-content'), 
+                { scale: 0.5, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }
+            );
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            
+            gsap.to(modal.querySelector('.modal-content'), {
+                scale: 0.5,
+                opacity: 0,
+                duration: 0.3,
+                onComplete: () => {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Close modal on outside click
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                const modalId = e.target.id;
+                closeModal(modalId);
+            }
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                submitBtn.textContent = 'Message Sent!';
+                submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = 'linear-gradient(45deg, var(--quantum-violet), var(--nebula-coral))';
+                    e.target.reset();
+                }, 2000);
+            }, 1500);
+        });
+
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // GSAP ScrollTrigger Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero text animations
+        gsap.fromTo(".hero-title", 
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.5, ease: "power3.out", delay: 2.5 }
+        );
+
+        gsap.fromTo(".hero-subtitle", 
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 3 }
+        );
+
+        gsap.fromTo(".hero-tagline", 
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 3.5 }
+        );
+
+        gsap.fromTo(".cta-button", 
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 4 }
+        );
+
+        // Gallery cards stagger animation
+        gsap.fromTo(".design-card", 
+            { y: 100, opacity: 0, rotationX: -45 },
+            { 
+                y: 0, 
+                opacity: 1, 
+                rotationX: 0,
+                duration: 1,
+                ease: "power3.out",
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: ".gallery-container",
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+        // Parallax effect for profile image
+        gsap.to(".profile-image", {
+            y: -50,
+            scrollTrigger: {
+                trigger: ".about",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Easter Egg: Konami Code
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.keyCode);
+            
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.length === konamiSequence.length && 
+                konamiCode.every((key, index) => key === konamiSequence[index])) {
+                
+                // Easter egg activated!
+                document.body.style.filter = 'hue-rotate(180deg)';
+                alert('🎉 Developer Mode Activated! Welcome to the Matrix, Neo.');
+                
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 5000);
+                
+                konamiCode = [];
+            }
+        });
+
+        // Performance optimization: Reduce animations on low-end devices
+        if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+            document.documentElement.style.setProperty('--animation-duration', '0.3s');
+        }
+    </script>
+</body>
+</html>
